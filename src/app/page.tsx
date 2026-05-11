@@ -27,7 +27,7 @@ const HeroSection = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black z-0">
       {/* 3D Mascot - Immediate Client Activation */}
       <div className="absolute inset-0 z-0 bg-black flex items-center justify-center pointer-events-none">
-        <div className="w-full h-full transform translate-y-[-15%] scale-125">
+        <div className="w-full h-full transform translate-y-[-10%] md:translate-y-[-15%] scale-[1.5] md:scale-125">
           <Hero3D />
         </div>
       </div>
@@ -45,7 +45,7 @@ const HeroSection = () => {
           <span className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Next Gen Education</span>
         </motion.div>
 
-        <h1 className="text-7xl md:text-[8.5rem] font-black leading-[0.85] tracking-tight uppercase mb-10 px-4">
+        <h1 className="text-5xl sm:text-7xl md:text-[8.5rem] font-black leading-[0.85] tracking-tight uppercase mb-10 px-4">
           <span className="block text-white/95">Redefining</span>
           <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent italic pb-4 pr-8">Excellence</span>
         </h1>
@@ -107,7 +107,7 @@ export default function Home() {
           initial="initial"
           whileInView="whileInView"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 h-auto md:h-[800px]"
+          className="grid grid-cols-1 md:grid-cols-4 grid-rows-none md:grid-rows-2 gap-6 h-auto md:h-[800px]"
         >
           <motion.div 
             variants={fadeInUpVariants}
@@ -204,7 +204,7 @@ export default function Home() {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="relative h-[800px] rounded-[4rem] overflow-hidden group shadow-2xl"
+            className="relative h-[400px] sm:h-[500px] lg:h-[800px] rounded-[4rem] overflow-hidden group shadow-2xl"
           >
             <img 
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071" 
@@ -257,7 +257,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="grid grid-cols-2 gap-4 h-[500px]"
+            className="grid grid-cols-2 gap-4 h-[300px] sm:h-[500px]"
           >
             <div className="rounded-[3rem] overflow-hidden border border-white/5 relative group">
               <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070" className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
@@ -274,7 +274,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="relative h-[600px] rounded-[4rem] overflow-hidden order-2 lg:order-1 shadow-2xl"
+            className="relative h-[400px] sm:h-[600px] rounded-[4rem] overflow-hidden order-2 lg:order-1 shadow-2xl"
           >
             <img src="/images/library.png" className="absolute inset-0 w-full h-full object-cover grayscale opacity-60 group-hover:scale-110 transition-transform duration-1000" />
             <div className="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent" />
@@ -314,13 +314,13 @@ export default function Home() {
           whileInView="whileInView"
           viewport={{ once: true }}
           variants={fadeInUpVariants}
-          className="text-center mb-24 relative p-20 rounded-[5rem] overflow-hidden bg-zinc-900/50 border border-white/5"
+          className="text-center mb-24 relative p-10 md:p-20 rounded-[3rem] md:rounded-[5rem] overflow-hidden bg-zinc-900/50 border border-white/5"
         >
           <img src="/images/community.png" className="absolute inset-0 w-full h-full object-cover opacity-10 grayscale" />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
           <div className="relative z-10">
             <h2 className="text-sm font-bold text-purple-500 uppercase tracking-[0.5em] mb-8">The Collective</h2>
-          <h3 className="text-5xl md:text-[10rem] font-black uppercase tracking-tighter leading-none mb-12">
+          <h3 className="text-4xl sm:text-5xl md:text-[10rem] font-black uppercase tracking-tighter leading-none mb-12">
             Build Your <span className="text-gray-600">Future</span>
           </h3>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed mb-16">
@@ -414,7 +414,7 @@ export default function Home() {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="max-w-7xl mx-auto relative rounded-[5rem] bg-zinc-950 border border-white/10 p-24 text-center overflow-hidden"
+          className="max-w-7xl mx-auto relative rounded-[3rem] md:rounded-[5rem] bg-zinc-950 border border-white/10 p-12 md:p-24 text-center overflow-hidden"
         >
           <img src="/images/future.png" className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale group-hover:scale-110 transition-transform duration-[3000ms]" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
@@ -422,7 +422,7 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-purple-500/10 rounded-full animate-[spin_30s_linear_infinite_reverse]" />
           
           <div className="relative z-10">
-            <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-12">
+            <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-12">
               The Future <br /> <span className="text-gray-600">Awaits You</span>
             </h2>
             <p className="text-xl text-gray-400 mb-16 max-w-2xl mx-auto font-light">

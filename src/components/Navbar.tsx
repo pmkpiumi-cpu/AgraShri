@@ -77,12 +77,17 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-32 left-6 right-6 p-8 rounded-[3rem] bg-black/90 backdrop-blur-3xl border border-white/10 md:hidden shadow-2xl"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="fixed inset-0 top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-3xl z-[200] flex flex-col p-12 md:hidden"
           >
-            <div className="flex flex-col gap-6">
+            <div className="flex justify-end mb-12">
+              <button onClick={() => setIsOpen(false)} className="p-4 rounded-2xl bg-white/5 border border-white/10 text-white">
+                <X className="w-8 h-8" />
+              </button>
+            </div>
+            <div className="flex flex-col gap-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}

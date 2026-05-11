@@ -25,7 +25,7 @@ export default function EnrollPage() {
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Enrollment Open 2026</span>
             </div>
-            <h1 className="text-6xl md:text-8xl font-black mb-8 uppercase tracking-tighter italic">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black mb-8 uppercase tracking-tighter italic">
               Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 pr-8">Ecosystem</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
