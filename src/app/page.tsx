@@ -24,7 +24,7 @@ const staggerContainer = {
 
 const HeroSection = () => {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black z-0">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black z-0 py-20">
       {/* 3D Mascot - Immediate Client Activation */}
       <div className="absolute inset-0 z-0 bg-black flex items-center justify-center pointer-events-none">
         <div className="w-full h-full transform translate-y-[-10%] md:translate-y-[-15%] scale-[1.5] md:scale-125">
