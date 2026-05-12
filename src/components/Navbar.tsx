@@ -54,12 +54,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <Link
-              href="/login"
-              className="px-8 py-3 bg-white text-black rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all shadow-xl active:scale-95"
-            >
-              Student Portal
-            </Link>
+
           </div>
 
           <div className="md:hidden">
