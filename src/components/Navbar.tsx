@@ -6,9 +6,9 @@ import { Menu, X, Rocket } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { name: "Ecosystem", href: "/" },
+  { name: "Home", href: "/" },
   { name: "Philosophy", href: "/#about" },
-  { name: "Blueprints", href: "/#courses" },
+  { name: "Courses", href: "/#courses" },
   { name: "Library", href: "/#library" },
   { name: "Community", href: "/#community" },
   { name: "Enrollment", href: "/enroll" },
@@ -39,7 +39,7 @@ export default function Navbar() {
               <span className="text-2xl font-black uppercase tracking-tighter text-white">AgraShri</span>
             </Link>
           </div>
-          
+
           <div className="hidden md:flex items-center gap-10">
             <div className="flex items-center gap-8">
               {navLinks.map((link) => (
@@ -53,9 +53,9 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
-            
-            <Link 
-              href="/login" 
+
+            <Link
+              href="/login"
               className="px-8 py-3 bg-white text-black rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all shadow-xl active:scale-95"
             >
               Student Portal
@@ -76,7 +76,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
@@ -98,8 +98,8 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Link 
-                href="/enroll" 
+              <Link
+                href="/enroll"
                 className="mt-4 w-full py-5 bg-blue-600 rounded-2xl text-center font-black uppercase tracking-widest text-white shadow-2xl shadow-blue-500/20"
                 onClick={() => setIsOpen(false)}
               >
