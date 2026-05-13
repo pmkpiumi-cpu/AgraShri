@@ -51,7 +51,14 @@ const HeroSection = () => (
       </p>
 
       <div className="flex flex-col sm:flex-row items-center gap-6 pointer-events-auto">
-
+        <Link
+          href="#expertise"
+          className="group relative px-10 py-5 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full font-black text-lg overflow-hidden transition-all hover:scale-105 shadow-[0_8px_30px_rgba(22,163,74,0.35)]"
+        >
+          <span className="relative z-10 flex items-center gap-3">
+            Explore Ecosystem <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </Link>
         <Link
           href="#expertise"
           className="group px-10 py-5 rounded-full border-2 border-green-200 bg-white font-bold text-lg hover:border-green-400 hover:bg-green-50 transition-all flex items-center gap-3 text-green-700 shadow-sm"
@@ -159,7 +166,7 @@ export default function Home() {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="relative h-auto min-h-[500px] lg:h-[800px] rounded-[4rem] overflow-hidden group shadow-2xl p-6 lg:p-0 flex flex-col justify-center gap-6 lg:block"
+            className="relative h-[400px] sm:h-[500px] lg:h-[800px] rounded-[4rem] overflow-hidden group shadow-2xl"
           >
             <img
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071"
@@ -167,15 +174,15 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-white/50 to-transparent" />
 
-            <div className="relative lg:absolute lg:top-12 lg:right-12 p-8 rounded-3xl bg-green-600 shadow-2xl max-w-xs z-10">
-              <p className="text-white font-black uppercase italic text-xl mb-3">Our Vision</p>
-              <p className="text-green-100 text-sm leading-relaxed">To empower every learner from childhood to adulthood with knowledge and life skills.</p>
+            <div className="absolute top-4 right-4 md:top-12 md:right-12 p-5 md:p-8 rounded-3xl bg-green-600 shadow-2xl max-w-[180px] sm:max-w-xs z-10">
+              <p className="text-white font-black uppercase italic text-lg md:text-xl mb-2 md:mb-3">Our Vision</p>
+              <p className="text-green-100 text-[10px] md:text-sm leading-relaxed">To empower every learner from childhood to adulthood with knowledge and life skills.</p>
             </div>
 
-            <div className="relative lg:absolute lg:bottom-12 lg:left-12 p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-green-100 max-w-sm shadow-lg z-10">
-              <Sparkles className="text-yellow-500 mb-4" />
-              <p className="text-[#14532D] font-black uppercase italic text-xl mb-3">Our Mission</p>
-              <p className="text-gray-500 text-sm leading-relaxed">To provide quality education while nurturing confident, skilled, and emotionally healthy individuals.</p>
+            <div className="absolute bottom-4 left-4 md:bottom-12 md:left-12 p-5 md:p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-green-100 max-w-[220px] sm:max-w-sm shadow-lg z-10">
+              <Sparkles className="text-yellow-500 mb-2 md:mb-4 w-4 h-4 md:w-6 md:h-6" />
+              <p className="text-[#14532D] font-black uppercase italic text-lg md:text-xl mb-2 md:mb-3">Our Mission</p>
+              <p className="text-gray-500 text-[10px] md:text-sm leading-relaxed">To provide quality education while nurturing confident, skilled, and emotionally healthy individuals.</p>
             </div>
           </motion.div>
         </div>
@@ -339,7 +346,9 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-
+                  <Link href="#about" className="inline-flex items-center gap-3 text-green-700 font-bold tracking-widest uppercase text-xs group-hover:gap-5 transition-all">
+                    Learn More <ArrowRight className="w-4 h-4 text-yellow-500" />
+                  </Link>
                 </div>
               </motion.div>
             ))}
@@ -359,18 +368,19 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/10 blur-[80px] rounded-full" />
 
           <div className="relative z-10">
-
+            <span className="inline-block px-4 py-1 rounded-full bg-white/10 text-yellow-300 text-xs font-black uppercase tracking-[0.4em] mb-10 border border-white/10">About Us</span>
             <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-10 text-white">
               The Future <br /><span className="text-yellow-400">Awaits You</span>
             </h2>
             <p className="text-xl text-green-200 mb-16 max-w-2xl mx-auto font-light">
-              Don&apos;t just observe the future. Build it. Enrollment for the 2026
-              Academic Year is now open for exclusive applicants.
+              Don&apos;t just observe the future. Build it. Explore our philosophy and get in touch with our team today.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-
+              <Link href="#about" className="px-16 py-6 bg-yellow-400 text-green-900 rounded-full font-black text-xl hover:bg-yellow-300 hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(250,204,21,0.4)]">
+                Our Philosophy
+              </Link>
               <Link href="/contact" className="px-16 py-6 rounded-full border-2 border-white/20 text-white font-black text-xl hover:bg-white/10 transition-all">
-                Talk to Advisor
+                Contact Us
               </Link>
             </div>
           </div>
