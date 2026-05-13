@@ -36,7 +36,7 @@ export default function Navbar() {
         `}>
           <div className="flex items-center">
             <Link href="/" className="group flex items-center gap-3">
-              <div className="relative w-12 h-12 overflow-hidden rounded-xl group-hover:scale-110 transition-transform duration-300">
+              <div className="relative w-16 h-16 overflow-hidden rounded-xl group-hover:scale-110 transition-transform duration-300">
                 <Image 
                   src="/logo.png" 
                   alt="AgraShri Logo" 
@@ -92,7 +92,7 @@ export default function Navbar() {
           >
             <div className="flex justify-between items-center mb-12">
               <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-                <div className="relative w-12 h-12 overflow-hidden rounded-xl">
+                <div className="relative w-16 h-16 overflow-hidden rounded-xl">
                   <Image 
                     src="/logo.png" 
                     alt="AgraShri Logo" 
