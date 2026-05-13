@@ -13,9 +13,9 @@ const Hero3D = dynamic(() => import("@/components/Hero3D"), { ssr: false });
 const fadeUp = {
   initial: { opacity: 0, y: 50 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.7, ease: "easeOut" }
-};
+  viewport: { once: true as const },
+  transition: { duration: 0.7, ease: "easeOut" as const }
+} as const;
 
 const HeroSection = () => (
   <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#F0F9F4] via-[#F9FAF7] to-white z-0 py-20">
