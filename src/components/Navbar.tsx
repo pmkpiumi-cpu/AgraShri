@@ -60,6 +60,8 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
+
+          </div>
           </div>
 
           <div className="md:hidden">
@@ -109,6 +111,7 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
+
             </div>
           </motion.div>
         )}

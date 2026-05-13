@@ -23,7 +23,7 @@ export default function Footer() {
               Empowering Minds, Building Futures. A modern learning and counseling ecosystem 
               dedicated to academic excellence, student wellbeing, and professional growth.
             </p>
-            </div>
+
           </div>
           
           <div>
@@ -31,6 +31,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li><Link href="/#about" className="hover:text-yellow-400 transition-colors">Philosophy</Link></li>
               <li><Link href="/#courses" className="hover:text-yellow-400 transition-colors">Our Programs</Link></li>
+
               <li><Link href="/join" className="hover:text-yellow-400 transition-colors">Join Faculty</Link></li>
               <li><Link href="/#community" className="hover:text-yellow-400 transition-colors">Community</Link></li>
             </ul>
