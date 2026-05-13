@@ -38,7 +38,7 @@ export default function Cursor() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        className="w-2 h-2 bg-blue-500 rounded-full"
+        className="w-2 h-2 bg-green-600 rounded-full"
       />
       
       {/* Large ring */}
@@ -49,7 +49,7 @@ export default function Cursor() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        className="w-10 h-10 border border-blue-500/30 rounded-full"
+        className="w-10 h-10 border-2 border-yellow-400/50 rounded-full"
       />
     </div>
   );

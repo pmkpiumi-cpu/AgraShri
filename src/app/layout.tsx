@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
 
-const inter = Inter({ subsets: ["latin"] });
+const plusJakarta = Plus_Jakarta_Sans({ 
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   title: "AgraShri Educational Institute | Empowering Minds, Building Futures",
@@ -17,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased bg-black`} suppressHydrationWarning>
+      <body className={`${plusJakarta.className} antialiased bg-[#F9FAF7]`} suppressHydrationWarning>
         <Cursor />
         {children}
       </body>

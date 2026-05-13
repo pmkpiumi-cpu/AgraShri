@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useState } from "react";
-import emailjs from "emailjs-com";
 import { Loader2, CheckCircle } from "lucide-react";
 
 const formSchema = z.object({
@@ -33,14 +32,6 @@ export default function EnrollmentForm() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      // Note: User needs to replace these with their actual EmailJS credentials
-      // await emailjs.send(
-      //   "YOUR_SERVICE_ID",
-      //   "YOUR_TEMPLATE_ID",
-      //   data,
-      //   "YOUR_PUBLIC_KEY"
-      // );
-      
       // Simulating a successful send for now
       await new Promise((resolve) => setTimeout(resolve, 2000));
       
@@ -56,15 +47,17 @@ export default function EnrollmentForm() {
 
   if (isSuccess) {
     return (
-      <div className="text-center p-12 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-md">
-        <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
-        <h3 className="text-3xl font-bold mb-4">Registration Sent!</h3>
-        <p className="text-gray-400 mb-8">
+      <div className="text-center p-12 bg-green-50 rounded-3xl border border-green-200">
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle className="w-10 h-10 text-green-600" />
+        </div>
+        <h3 className="text-3xl font-bold mb-4 text-[#14532D]">Registration Sent!</h3>
+        <p className="text-gray-500 mb-8">
           Thank you for enrolling with AgraShri. We have received your details and will get back to you soon.
         </p>
         <button
           onClick={() => setIsSuccess(false)}
-          className="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-bold transition-all"
+          className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white rounded-full font-bold transition-all hover:shadow-[0_4px_20px_rgba(22,163,74,0.4)]"
         >
           Send Another
         </button>
@@ -72,23 +65,26 @@ export default function EnrollmentForm() {
     );
   }
 
+  const inputClass = "w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all";
+  const labelClass = "block text-sm font-semibold text-gray-600 mb-2";
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Full Name</label>
+          <label className={labelClass}>Full Name</label>
           <input
             {...register("fullName")}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors"
+            className={inputClass}
             placeholder="John Doe"
           />
           {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+          <label className={labelClass}>Email Address</label>
           <input
             {...register("email")}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors"
+            className={inputClass}
             placeholder="john@example.com"
           />
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
@@ -97,35 +93,35 @@ export default function EnrollmentForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Phone Number</label>
+          <label className={labelClass}>Phone Number</label>
           <input
             {...register("phone")}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors"
+            className={inputClass}
             placeholder="07X XXX XXXX"
           />
           {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">Program Interest</label>
+          <label className={labelClass}>Program Interest</label>
           <select
             {...register("program")}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors appearance-none"
+            className={inputClass}
           >
-            <option value="" className="bg-black">Select a program</option>
-            <option value="school" className="bg-black">School Students (Grade 1-A/L)</option>
-            <option value="university" className="bg-black">University Students</option>
-            <option value="adults" className="bg-black">Adult Learners / Professional</option>
+            <option value="" className="bg-white text-gray-400">Select a program</option>
+            <option value="school" className="bg-white">School Students (Grade 1-A/L)</option>
+            <option value="university" className="bg-white">University Students</option>
+            <option value="adults" className="bg-white">Adult Learners / Professional</option>
           </select>
           {errors.program && <p className="text-red-500 text-xs mt-1">{errors.program.message}</p>}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2">Additional Message (Optional)</label>
+        <label className={labelClass}>Additional Message (Optional)</label>
         <textarea
           {...register("message")}
           rows={4}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 transition-colors"
+          className={inputClass}
           placeholder="Tell us about your learning goals..."
         />
       </div>
@@ -133,14 +129,14 @@ export default function EnrollmentForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+        className="w-full py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 hover:shadow-[0_8px_30px_rgba(22,163,74,0.35)] active:scale-[0.98]"
       >
         {isSubmitting ? (
           <>
             <Loader2 className="animate-spin" /> Processing...
           </>
         ) : (
-          "Submit Enrollment"
+          "Submit Enrollment →"
         )}
       </button>
     </form>
