@@ -61,6 +61,12 @@ export default function Navbar() {
               ))}
             </div>
 
+            <Link
+              href="/enroll"
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-green-600 to-green-700 text-white text-xs font-black uppercase tracking-widest hover:shadow-[0_4px_20px_rgba(22,163,74,0.4)] hover:scale-105 transition-all"
+            >
+              Enroll Now
+            </Link>
           </div>
 
           <div className="md:hidden">
@@ -110,6 +116,13 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
+              <Link
+                href="/enroll"
+                className="mt-4 w-full py-5 bg-gradient-to-r from-green-600 to-green-700 rounded-2xl text-center font-black uppercase tracking-widest text-white shadow-[0_8px_30px_rgba(22,163,74,0.3)]"
+                onClick={() => setIsOpen(false)}
+              >
+                Enroll Now
+              </Link>
             </div>
           </motion.div>
         )}

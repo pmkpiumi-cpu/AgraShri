@@ -24,8 +24,8 @@ export default function Footer() {
               dedicated to academic excellence, student wellbeing, and professional growth.
             </p>
             <div className="flex gap-3">
-              <div className="w-2 h-2 rounded-full bg-yellow-400" />
-              <span className="text-xs text-yellow-400 font-bold uppercase tracking-widest">Excellence in Education</span>
+              <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+              <span className="text-xs text-yellow-400 font-bold uppercase tracking-widest">Enrollment Open 2026</span>
             </div>
           </div>
           
@@ -34,6 +34,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm">
               <li><Link href="/#about" className="hover:text-yellow-400 transition-colors">Philosophy</Link></li>
               <li><Link href="/#courses" className="hover:text-yellow-400 transition-colors">Our Programs</Link></li>
+              <li><Link href="/enroll" className="hover:text-yellow-400 transition-colors">Enrollment</Link></li>
               <li><Link href="/join" className="hover:text-yellow-400 transition-colors">Join Faculty</Link></li>
               <li><Link href="/#community" className="hover:text-yellow-400 transition-colors">Community</Link></li>
             </ul>

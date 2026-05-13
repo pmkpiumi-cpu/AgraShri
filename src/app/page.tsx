@@ -52,11 +52,11 @@ const HeroSection = () => (
 
       <div className="flex flex-col sm:flex-row items-center gap-6 pointer-events-auto">
         <Link
-          href="#expertise"
+          href="/enroll"
           className="group relative px-10 py-5 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full font-black text-lg overflow-hidden transition-all hover:scale-105 shadow-[0_8px_30px_rgba(22,163,74,0.35)]"
         >
           <span className="relative z-10 flex items-center gap-3">
-            Explore Ecosystem <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            Join AgraShri <GraduationCap className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </span>
         </Link>
         <Link
@@ -373,14 +373,15 @@ export default function Home() {
               The Future <br /><span className="text-yellow-400">Awaits You</span>
             </h2>
             <p className="text-xl text-green-200 mb-16 max-w-2xl mx-auto font-light">
-              Don&apos;t just observe the future. Build it. Explore our philosophy and get in touch with our team today.
+              Don&apos;t just observe the future. Build it. Enrollment for the 2026
+              Academic Year is now open for exclusive applicants.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-              <Link href="#about" className="px-16 py-6 bg-yellow-400 text-green-900 rounded-full font-black text-xl hover:bg-yellow-300 hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(250,204,21,0.4)]">
-                Our Philosophy
+              <Link href="/enroll" className="px-16 py-6 bg-yellow-400 text-green-900 rounded-full font-black text-xl hover:bg-yellow-300 hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(250,204,21,0.4)]">
+                Secure Your Spot
               </Link>
               <Link href="/contact" className="px-16 py-6 rounded-full border-2 border-white/20 text-white font-black text-xl hover:bg-white/10 transition-all">
-                Contact Us
+                Talk to Advisor
               </Link>
             </div>
           </div>
