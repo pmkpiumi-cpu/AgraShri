@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Mail, Phone, MapPin, Clock, GraduationCap } from "lucide-react";
+import Image from "next/image";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -8,8 +9,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center shadow-lg">
-                <GraduationCap className="w-6 h-6 text-green-900" />
+              <div className="relative w-12 h-12 overflow-hidden rounded-xl shadow-lg bg-white/10 p-1">
+                <Image 
+                  src="/logo.png" 
+                  alt="AgraShri Logo" 
+                  fill
+                  className="object-contain p-1"
+                />
               </div>
               <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter">AgraShri</h2>
             </div>

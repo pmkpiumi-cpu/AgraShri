@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X, GraduationCap } from "lucide-react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -35,8 +36,13 @@ export default function Navbar() {
         `}>
           <div className="flex items-center">
             <Link href="/" className="group flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center group-hover:rotate-12 transition-transform shadow-[0_4px_14px_rgba(22,163,74,0.35)]">
-                <GraduationCap className="w-6 h-6 text-white" />
+              <div className="relative w-12 h-12 overflow-hidden rounded-xl group-hover:scale-110 transition-transform duration-300">
+                <Image 
+                  src="/logo.png" 
+                  alt="AgraShri Logo" 
+                  fill
+                  className="object-contain"
+                />
               </div>
               <span className="text-2xl font-black uppercase tracking-tighter text-[#14532D]">AgraShri</span>
             </Link>
@@ -86,8 +92,13 @@ export default function Navbar() {
           >
             <div className="flex justify-between items-center mb-12">
               <Link href="/" className="flex items-center gap-3" onClick={() => setIsOpen(false)}>
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
-                  <GraduationCap className="w-6 h-6 text-white" />
+                <div className="relative w-12 h-12 overflow-hidden rounded-xl">
+                  <Image 
+                    src="/logo.png" 
+                    alt="AgraShri Logo" 
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <span className="text-2xl font-black uppercase tracking-tighter text-[#14532D]">AgraShri</span>
               </Link>
