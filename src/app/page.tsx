@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, BookOpen, Users, HeartPulse, GraduationCap, Shield, Target, Zap, Globe, Cpu, Star, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useRef, Suspense, useState, useEffect } from "react";
 
 const Hero3D = dynamic(() => import("@/components/Hero3D"), { ssr: false });
@@ -86,7 +87,7 @@ const EventsCarousel = () => {
     <div className="max-w-7xl mx-auto px-6 relative">
       <motion.div {...fadeUp} className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <h4 className="text-3xl md:text-5xl font-black uppercase text-[#14532D]">Recent <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic">Forums</span></h4>
+          <h2 className="text-3xl md:text-5xl font-black uppercase text-[#14532D]">Recent <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic">Forums</span></h2>
           <p className="text-gray-500 mt-4 max-w-lg font-light leading-relaxed">Explore our latest philosophy forums, psychological stress management workshops, and student empowerment seminars.</p>
         </div>
       </motion.div>
@@ -104,14 +105,19 @@ const EventsCarousel = () => {
               onClick={() => setSelectedImage(ev)}
               className="min-w-[85vw] sm:min-w-[400px] h-[500px] rounded-[2rem] overflow-hidden relative group shadow-xl border border-green-50 shrink-0 bg-black/5 cursor-pointer"
             >
-              <img src={ev.image} alt={ev.title} className="absolute inset-0 w-full h-full object-cover scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700" />
+              <Image 
+                src={ev.image} 
+                alt={`${ev.title} - AgraShri Educational Event`} 
+                fill
+                className="absolute inset-0 w-full h-full object-cover scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700" 
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-[#14532D] via-[#14532D]/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
                 <div className="bg-yellow-400 text-green-900 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full w-fit mb-4 shadow-lg shadow-yellow-400/20">
                   {ev.tag}
                 </div>
-                <h5 className="text-2xl font-black text-white mb-3 leading-tight">{ev.title}</h5>
+                <h3 className="text-2xl font-black text-white mb-3 leading-tight">{ev.title}</h3>
                 <p className="text-green-50 text-sm leading-relaxed opacity-90 line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
                   {ev.desc}
                 </p>
@@ -157,10 +163,11 @@ const EventsCarousel = () => {
                 <X className="w-6 h-6" />
               </button>
               <div className="relative flex-1 min-h-0 bg-black/5 flex items-center justify-center overflow-hidden">
-                <img
+                <Image
                   src={selectedImage.image}
-                  alt={selectedImage.title}
-                  className="w-full h-full object-contain max-h-[70vh]"
+                  alt={`${selectedImage.title} Full View`}
+                  fill
+                  className="object-contain"
                 />
               </div>
               <div className="p-6 md:p-8 bg-white shrink-0">
@@ -243,29 +250,39 @@ export default function Home() {
       <section id="expertise" className="py-32 px-6 max-w-7xl mx-auto">
         <motion.div {...fadeUp} className="text-center mb-20">
           <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-6">Our Ecosystem</span>
-          <h3 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none text-[#14532D]">
+          <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none text-[#14532D]">
             The Bento of <br /><span className="text-green-300">Innovation</span>
-          </h3>
+          </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-none md:grid-rows-2 gap-6 h-auto md:h-[800px]">
           <motion.div {...fadeUp} className="md:col-span-2 md:row-span-2 group relative rounded-[3rem] overflow-hidden bg-white border border-green-100 shadow-sm hover:shadow-xl transition-shadow p-12 flex flex-col justify-end">
-            <img src="/images/academics.png" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-55 group-hover:scale-110 transition-all duration-1000" />
+            <Image 
+              src="/images/academics.png" 
+              alt="Elite Academics at AgraShri Educational Institute" 
+              fill
+              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-55 group-hover:scale-110 transition-all duration-1000" 
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-white/10" />
             <div className="relative z-10">
               <div className="p-4 rounded-2xl bg-green-600 w-fit mb-8 shadow-[0_4px_20px_rgba(22,163,74,0.4)]">
                 <Cpu className="w-8 h-8 text-white" />
               </div>
-              <h4 className="text-4xl font-black mb-4 uppercase text-[#14532D]">Elite Academics</h4>
+              <h3 className="text-4xl font-black mb-4 uppercase text-[#14532D]">Elite Academics</h3>
               <p className="text-gray-500 text-lg leading-relaxed max-w-md">Subject-based classes, exam preparation, and professional courses conducted by qualified lecturers from Grade 1 to A/L.</p>
             </div>
           </motion.div>
 
           <motion.div {...fadeUp} className="md:col-span-2 group relative rounded-[3rem] overflow-hidden bg-white border border-green-100 shadow-sm hover:shadow-xl transition-shadow p-10 flex items-center justify-between">
-            <img src="/images/counseling.png" className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-1000" />
+            <Image 
+              src="/images/counseling.png" 
+              alt="Counseling and Wellbeing services at AgraShri" 
+              fill
+              className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-50 group-hover:scale-110 transition-all duration-1000" 
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent" />
             <div className="relative z-10">
-              <h4 className="text-3xl font-black mb-4 uppercase text-[#14532D]">Counseling 2.0</h4>
+              <h3 className="text-3xl font-black mb-4 uppercase text-[#14532D]">Counseling 2.0</h3>
               <p className="text-gray-500 max-w-[220px]">Professional support for stress management, academic pressure, and emotional wellbeing.</p>
             </div>
             <HeartPulse className="w-32 h-32 text-green-200 absolute -right-4 -bottom-4 group-hover:scale-125 transition-transform duration-700" />
@@ -274,7 +291,7 @@ export default function Home() {
           <motion.div {...fadeUp} className="md:col-span-1 group relative rounded-[3rem] overflow-hidden bg-white border border-green-100 shadow-sm hover:shadow-xl transition-shadow p-10 flex flex-col justify-between">
             <Users className="w-10 h-10 text-green-500" />
             <div>
-              <h4 className="text-2xl font-black mb-2 uppercase text-[#14532D]">Community</h4>
+              <h3 className="text-2xl font-black mb-2 uppercase text-[#14532D]">Community</h3>
               <p className="text-sm text-gray-500">Network with teachers, mentors, and professionals in our forum.</p>
             </div>
           </motion.div>
@@ -282,7 +299,7 @@ export default function Home() {
           <motion.div {...fadeUp} className="md:col-span-1 group relative rounded-[3rem] overflow-hidden bg-yellow-400 border border-yellow-300 shadow-sm hover:shadow-xl transition-shadow p-10 flex flex-col justify-between">
             <Star className="w-10 h-10 text-yellow-800 fill-yellow-800" />
             <div className="text-yellow-900">
-              <h4 className="text-2xl font-black mb-2 uppercase">Quality First</h4>
+              <h3 className="text-2xl font-black mb-2 uppercase">Quality First</h3>
               <p className="text-sm opacity-80">Teacher quality assurance & student monitoring.</p>
             </div>
           </motion.div>
@@ -295,9 +312,9 @@ export default function Home() {
           <motion.div {...fadeUp} className="relative">
             <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-green-100/50 blur-[120px] rounded-full" />
             <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-8">The Legacy</span>
-            <h3 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
+            <h2 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
               Discover <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic pr-8">Our Story</span>
-            </h3>
+            </h2>
             <p className="text-xl text-gray-500 font-light leading-relaxed mb-12">
               AgraShri Education Institute is a complete educational development platform.
               We empower every learner from childhood to adulthood with knowledge, confidence,
@@ -318,7 +335,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <Link href="/about" className="inline-flex items-center gap-4 text-green-700 font-black tracking-widest uppercase text-xs hover:gap-6 transition-all">
+            <Link href="/#about" className="inline-flex items-center gap-4 text-green-700 font-black tracking-widest uppercase text-xs hover:gap-6 transition-all">
               Learn More <ArrowRight className="w-4 h-4 text-yellow-500" />
             </Link>
           </motion.div>
@@ -329,20 +346,22 @@ export default function Home() {
             transition={{ duration: 1 }}
             className="relative h-[400px] sm:h-[500px] lg:h-[800px] rounded-[4rem] overflow-hidden group shadow-2xl"
           >
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071"
+              alt="Students collaborating at AgraShri Educational Institute"
+              fill
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-white/50 to-transparent" />
 
             <div className="absolute top-4 right-4 md:top-12 md:right-12 p-5 md:p-8 rounded-3xl bg-green-600 shadow-2xl max-w-[180px] sm:max-w-xs z-10">
-              <p className="text-white font-black uppercase italic text-lg md:text-xl mb-2 md:mb-3">Our Vision</p>
+              <h3 className="text-white font-black uppercase italic text-lg md:text-xl mb-2 md:mb-3">Our Vision</h3>
               <p className="text-green-100 text-[10px] md:text-sm leading-relaxed">To empower every learner from childhood to adulthood with knowledge and life skills.</p>
             </div>
 
             <div className="absolute bottom-4 left-4 md:bottom-12 md:left-12 p-5 md:p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-green-100 max-w-[220px] sm:max-w-sm shadow-lg z-10">
               <Sparkles className="text-yellow-500 mb-2 md:mb-4 w-4 h-4 md:w-6 md:h-6" />
-              <p className="text-[#14532D] font-black uppercase italic text-lg md:text-xl mb-2 md:mb-3">Our Mission</p>
+              <h3 className="text-[#14532D] font-black uppercase italic text-lg md:text-xl mb-2 md:mb-3">Our Mission</h3>
               <p className="text-gray-500 text-[10px] md:text-sm leading-relaxed">To provide quality education while nurturing confident, skilled, and emotionally healthy individuals.</p>
             </div>
           </motion.div>
@@ -355,9 +374,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <motion.div {...fadeUp}>
             <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-8">The Advantage</span>
-            <h3 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
+            <h2 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
               Why Choose <br /><span className="text-green-300 italic">AgraShri?</span>
-            </h3>
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
               {[
                 { title: "Beyond Tuition", desc: "More than just a center, we are a growth platform." },
@@ -367,7 +386,7 @@ export default function Home() {
               ].map((item, i) => (
                 <div key={i} className="group">
                   <div className="w-8 h-1 bg-yellow-400 rounded-full mb-3 group-hover:w-12 transition-all" />
-                  <h4 className="text-[#14532D] font-black uppercase mb-2 group-hover:text-green-600 transition-colors">{item.title}</h4>
+                  <h3 className="text-[#14532D] font-black uppercase mb-2 group-hover:text-green-600 transition-colors">{item.title}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -380,10 +399,20 @@ export default function Home() {
             className="grid grid-cols-2 gap-4 h-[300px] sm:h-[500px]"
           >
             <div className="rounded-[3rem] overflow-hidden border border-green-100 relative group shadow-lg">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
+              <Image 
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070" 
+                alt="AgraShri Educational Institute Modern Classroom" 
+                fill
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
+              />
             </div>
             <div className="rounded-[3rem] overflow-hidden border border-green-100 relative group mt-12 shadow-lg">
-              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
+              <Image 
+                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070" 
+                alt="Students studying at AgraShri Sanctuary" 
+                fill
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-700" 
+              />
             </div>
           </motion.div>
         </div>
@@ -397,15 +426,20 @@ export default function Home() {
             whileInView={{ opacity: 1, scale: 1 }}
             className="relative h-[400px] sm:h-[600px] rounded-[4rem] overflow-hidden order-2 lg:order-1 shadow-2xl"
           >
-            <img src="/images/library.png" className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-1000" />
+            <Image 
+              src="/images/library.png" 
+              alt="AgraShri Educational Institute Library Sanctuary" 
+              fill
+              className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-1000" 
+            />
             <div className="absolute inset-0 bg-gradient-to-l from-white/40 to-transparent" />
           </motion.div>
 
           <motion.div {...fadeUp} className="order-1 lg:order-2">
             <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-8">The Hub</span>
-            <h3 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
+            <h2 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
               Learning <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic pr-8">Sanctuary</span>
-            </h3>
+            </h2>
             <p className="text-xl text-gray-500 font-light leading-relaxed mb-12">
               Our library facilities provide a dedicated learning space, extensive reading resources, and quiet study areas for independent research and focused growth.
             </p>
@@ -429,13 +463,18 @@ export default function Home() {
       {/* Community */}
       <section id="community" className="py-32 px-6 max-w-7xl mx-auto">
         <motion.div {...fadeUp} className="text-center relative p-10 md:p-20 rounded-[3rem] md:rounded-[5rem] overflow-hidden bg-white border border-green-100 shadow-sm">
-          <img src="/images/community.png" className="absolute inset-0 w-full h-full object-cover opacity-25" />
+          <Image 
+            src="/images/community.png" 
+            alt="AgraShri Educational Institute Community and Networking" 
+            fill
+            className="absolute inset-0 w-full h-full object-cover opacity-25" 
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/30 to-white/80" />
           <div className="relative z-10">
             <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-8">The Collective</span>
-            <h3 className="text-4xl sm:text-5xl md:text-[9rem] font-black uppercase tracking-tighter leading-none mb-12 text-[#14532D]">
+            <h2 className="text-4xl sm:text-5xl md:text-[9rem] font-black uppercase tracking-tighter leading-none mb-12 text-[#14532D]">
               Build Your <span className="text-green-200">Future</span>
-            </h3>
+            </h2>
             <p className="text-xl text-gray-500 max-w-3xl mx-auto font-light leading-relaxed mb-16">
               At AgraShri, students network with teachers, mentors, professionals, and peers through our exclusive community platform.
             </p>
@@ -456,7 +495,7 @@ export default function Home() {
           <motion.div {...fadeUp} className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
             <div>
               <span className="inline-block px-4 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-black uppercase tracking-[0.4em] mb-6">Our Programs</span>
-              <h3 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] text-[#14532D]">Mastery <br />Levels</h3>
+              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] text-[#14532D]">Mastery <br />Levels</h2>
             </div>
             <p className="text-gray-500 max-w-xs font-medium uppercase text-xs tracking-widest leading-loose">
               Every program is a curated journey designed for specific milestones in life.
@@ -471,7 +510,8 @@ export default function Home() {
                 items: ["Scholarship Prep", "O/L & A/L Classes", "Language Classes", "Career Training"],
                 gradient: "from-green-500 to-green-700",
                 badgeColor: "bg-green-600",
-                img: "/images/level1.png"
+                img: "/images/level1.png",
+                alt: "AgraShri School Titans Program for Grade 1 to A/L students"
               },
               {
                 lvl: "02",
@@ -479,7 +519,8 @@ export default function Home() {
                 items: ["Research Guidance", "Skill Development", "Presentation Training", "Language Classes"],
                 gradient: "from-yellow-400 to-yellow-600",
                 badgeColor: "bg-yellow-500",
-                img: "/images/level2.png"
+                img: "/images/level2.png",
+                alt: "AgraShri Uni Pioneers Program for University Students and Research Guidance"
               },
               {
                 lvl: "03",
@@ -487,7 +528,8 @@ export default function Home() {
                 items: ["Language Classes", "Professional Courses", "Personal Growth", "Networking Events"],
                 gradient: "from-green-700 to-green-900",
                 badgeColor: "bg-green-800",
-                img: "/images/level3.png"
+                img: "/images/level3.png",
+                alt: "AgraShri Adult Visionaries Program for Professional Courses and Personal Growth"
               }
             ].map((p, idx) => (
               <motion.div
@@ -498,10 +540,15 @@ export default function Home() {
                 transition={{ delay: idx * 0.15 }}
                 className="group relative h-[600px] rounded-[3rem] overflow-hidden border border-green-100 hover:shadow-2xl transition-all duration-500 bg-white"
               >
-                <img src={p.img} className="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:opacity-65 group-hover:scale-110 transition-all duration-1000" />
+                <Image 
+                  src={p.img} 
+                  alt={p.alt} 
+                  fill
+                  className="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:opacity-65 group-hover:scale-110 transition-all duration-1000" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-white/55 to-white/10 p-10 flex flex-col justify-end">
                   <div className={`text-6xl font-black opacity-20 mb-4 bg-gradient-to-r ${p.gradient} bg-clip-text text-transparent group-hover:opacity-100 transition-opacity`}>{p.lvl}</div>
-                  <h4 className="text-3xl font-black text-[#14532D] uppercase italic mb-5 group-hover:translate-x-2 transition-transform">{p.title}</h4>
+                  <h3 className="text-3xl font-black text-[#14532D] uppercase italic mb-5 group-hover:translate-x-2 transition-transform">{p.title}</h3>
                   <ul className="mb-8 space-y-3">
                     {p.items.map((item) => (
                       <li key={item} className="flex items-center gap-3 text-gray-600 font-bold uppercase text-[10px] tracking-widest">
@@ -510,7 +557,7 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <Link href="#about" className="inline-flex items-center gap-3 text-green-700 font-bold tracking-widest uppercase text-xs group-hover:gap-5 transition-all">
+                  <Link href="/#about" className="inline-flex items-center gap-3 text-green-700 font-bold tracking-widest uppercase text-xs group-hover:gap-5 transition-all">
                     Learn More <ArrowRight className="w-4 h-4 text-yellow-500" />
                   </Link>
                 </div>
@@ -532,7 +579,7 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-400/10 blur-[80px] rounded-full" />
 
           <div className="relative z-10">
-            <span className="inline-block px-4 py-1 rounded-full bg-white/10 text-yellow-300 text-xs font-black uppercase tracking-[0.4em] mb-10 border border-white/10">About Us</span>
+            <span className="inline-block px-4 py-1 rounded-full bg-white/10 text-yellow-300 text-xs font-black uppercase tracking-[0.4em] mb-10 border border-white/10">Join Us</span>
             <h2 className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-10 text-white">
               The Future <br /><span className="text-yellow-400">Awaits You</span>
             </h2>
@@ -544,7 +591,7 @@ export default function Home() {
               <Link href="/enroll" className="px-16 py-6 bg-yellow-400 text-green-900 rounded-full font-black text-xl hover:bg-yellow-300 hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(250,204,21,0.4)]">
                 Secure Your Spot
               </Link>
-              <Link href="/contact" className="px-16 py-6 rounded-full border-2 border-white/20 text-white font-black text-xl hover:bg-white/10 transition-all">
+              <Link href="#contact" className="px-16 py-6 rounded-full border-2 border-white/20 text-white font-black text-xl hover:bg-white/10 transition-all">
                 Talk to Advisor
               </Link>
             </div>

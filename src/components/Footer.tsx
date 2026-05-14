@@ -35,12 +35,12 @@ export default function Footer() {
               <li><Link href="/#about" className="hover:text-yellow-400 transition-colors">Philosophy</Link></li>
               <li><Link href="/#courses" className="hover:text-yellow-400 transition-colors">Our Programs</Link></li>
               <li><Link href="/enroll" className="hover:text-yellow-400 transition-colors">Enrollment</Link></li>
-              <li><Link href="/join" className="hover:text-yellow-400 transition-colors">Join Faculty</Link></li>
+              <li><Link href="/enroll" className="hover:text-yellow-400 transition-colors">Join Faculty</Link></li>
               <li><Link href="/#community" className="hover:text-yellow-400 transition-colors">Community</Link></li>
             </ul>
           </div>
 
-          <div>
+          <div id="contact">
             <h3 className="text-white font-bold mb-6 uppercase text-xs tracking-[0.3em]">Contact</h3>
             <ul className="space-y-4 text-sm font-medium">
               <li className="flex items-center gap-3">

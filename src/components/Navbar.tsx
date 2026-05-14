@@ -12,6 +12,7 @@ const navLinks = [
   { name: "Courses", href: "/#courses" },
   { name: "Library", href: "/#library" },
   { name: "Community", href: "/#community" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
