@@ -5,7 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useState } from "react";
 import { Loader2, CheckCircle, AlertCircle, Clock } from "lucide-react";
-import { submitEnrollment } from "@/app/actions/enroll";
+import emailjs from "emailjs-com";
+import { checkRateLimit } from "@/app/actions/enroll";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -16,6 +17,12 @@ const formSchema = z.object({
 });
 
 type FormData = z.infer<typeof formSchema>;
+
+const PROGRAM_LABELS: Record<string, string> = {
+  school: "School Students (Grade 1–A/L)",
+  university: "University Students",
+  adults: "Adult Learners / Professional",
+};
 
 export default function EnrollmentForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,16 +41,41 @@ export default function EnrollmentForm() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setServerError(null);
+
     try {
-      const result = await submitEnrollment(data);
-      if (result.success) {
-        setIsSuccess(true);
-        reset();
-      } else {
-        setServerError({ message: result.error, rateLimited: result.rateLimited });
+      // Step 1: Server-side rate limit check
+      const rateResult = await checkRateLimit();
+      if (!rateResult.allowed) {
+        setServerError({ message: rateResult.error!, rateLimited: true });
+        return;
       }
-    } catch {
-      setServerError({ message: "Something went wrong. Please try again later." });
+
+      // Step 2: Send email via EmailJS
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: data.fullName,
+          from_email: data.email,
+          phone: data.phone,
+          program: PROGRAM_LABELS[data.program] ?? data.program,
+          message: data.message || "No additional message.",
+          to_email: "agrashri.info@gmail.com",
+        },
+        publicKey
+      );
+
+      setIsSuccess(true);
+      reset();
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setServerError({
+        message: "Email send කිරීම අසාර්ථකයි. කරුණාකර නැවත try කරන්න, නැතිනම් phone කරන්න.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -69,22 +101,26 @@ export default function EnrollmentForm() {
     );
   }
 
-  const inputClass = "w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all";
+  const inputClass =
+    "w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition-all";
   const labelClass = "block text-sm font-semibold text-gray-600 mb-2";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      {/* Server error / rate limit banner */}
+      {/* Error / rate limit banner */}
       {serverError && (
-        <div className={`flex items-start gap-3 p-4 rounded-2xl border ${
-          serverError.rateLimited
-            ? "bg-amber-50 border-amber-200 text-amber-800"
-            : "bg-red-50 border-red-200 text-red-700"
-        }`}>
-          {serverError.rateLimited
-            ? <Clock className="w-5 h-5 shrink-0 mt-0.5" />
-            : <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-          }
+        <div
+          className={`flex items-start gap-3 p-4 rounded-2xl border ${
+            serverError.rateLimited
+              ? "bg-amber-50 border-amber-200 text-amber-800"
+              : "bg-red-50 border-red-200 text-red-700"
+          }`}
+        >
+          {serverError.rateLimited ? (
+            <Clock className="w-5 h-5 shrink-0 mt-0.5" />
+          ) : (
+            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+          )}
           <p className="text-sm font-medium">{serverError.message}</p>
         </div>
       )}
@@ -92,20 +128,12 @@ export default function EnrollmentForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className={labelClass}>Full Name</label>
-          <input
-            {...register("fullName")}
-            className={inputClass}
-            placeholder="John Doe"
-          />
+          <input {...register("fullName")} className={inputClass} placeholder="John Doe" />
           {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName.message}</p>}
         </div>
         <div>
           <label className={labelClass}>Email Address</label>
-          <input
-            {...register("email")}
-            className={inputClass}
-            placeholder="john@example.com"
-          />
+          <input {...register("email")} className={inputClass} placeholder="john@example.com" />
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
         </div>
       </div>
@@ -113,19 +141,12 @@ export default function EnrollmentForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className={labelClass}>Phone Number</label>
-          <input
-            {...register("phone")}
-            className={inputClass}
-            placeholder="07X XXX XXXX"
-          />
+          <input {...register("phone")} className={inputClass} placeholder="07X XXX XXXX" />
           {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
         </div>
         <div>
           <label className={labelClass}>Program Interest</label>
-          <select
-            {...register("program")}
-            className={inputClass}
-          >
+          <select {...register("program")} className={inputClass}>
             <option value="" className="bg-white text-gray-400">Select a program</option>
             <option value="school" className="bg-white">School Students (Grade 1-A/L)</option>
             <option value="university" className="bg-white">University Students</option>
@@ -152,7 +173,7 @@ export default function EnrollmentForm() {
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="animate-spin" /> Processing...
+            <Loader2 className="animate-spin" /> Sending...
           </>
         ) : serverError?.rateLimited ? (
           <>
