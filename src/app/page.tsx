@@ -2,11 +2,11 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Users, HeartPulse, GraduationCap, Shield, Target, Zap, Globe, Cpu, Star, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, BookOpen, Users, HeartPulse, GraduationCap, Shield, Target, Zap, Globe, Cpu, Star, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useRef, Suspense } from "react";
+import { useRef, Suspense, useState, useEffect } from "react";
 
 const Hero3D = dynamic(() => import("@/components/Hero3D"), { ssr: false });
 
@@ -16,6 +16,163 @@ const fadeUp = {
   viewport: { once: true as const },
   transition: { duration: 0.7, ease: "easeOut" as const }
 } as const;
+
+const libraryEvents = [
+  {
+    id: 6,
+    title: "Modern Technology",
+    desc: "\"The Impact of Modern Technology on People's Lives\" presented by W.G.I.M.K. Wimalaweera, University of Peradeniya.",
+    tag: "Tech & Society",
+    image: "/images/events/library-event-1.jpeg"
+  },
+  {
+    id: 7,
+    title: "Motivation & Emotions",
+    desc: "A study on Motivation and Emotions based on Buddhist concepts with practical examples. Presented by Erandi Kaushalya Madhushani, University of Peradeniya.",
+    tag: "Buddhist Psychology",
+    image: "/images/events/library-event-2.jpeg"
+  },
+  {
+    id: 1,
+    title: "Philosophy of Fearmorhosis",
+    desc: "One Day Philosophy Forum about 'Life, Society and Nation are Governed by Fear' conducted by Mr. Desh Subba.",
+    tag: "Philosophy Forum",
+    image: "/images/events/philosophy-fear-1.jpeg"
+  },
+  {
+    id: 2,
+    title: "Mindfulness in Daily Life",
+    desc: "Integrating Mindfulness into Daily Life for Stress Management by Venerable Keppetipola Gnanawimala Thero.",
+    tag: "Buddhist Psychology",
+    image: "/images/events/buddhist-psych-2.jpeg"
+  },
+  {
+    id: 3,
+    title: "Empowering Students",
+    desc: "Seminar Series for Ordinary Level Examination at Dedugala Central College.",
+    tag: "Seminar",
+    image: "/images/events/empowering-students-1.jpeg"
+  }
+];
+
+const EventsCarousel = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<typeof libraryEvents[0] | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % libraryEvents.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (carouselRef.current && carouselRef.current.children.length > 0) {
+      const cardWidth = (carouselRef.current.children[0] as HTMLElement).offsetWidth + 24; // 24px is gap-6
+      carouselRef.current.scrollTo({
+        left: activeIndex * cardWidth,
+        behavior: 'smooth'
+      });
+    }
+  }, [activeIndex]);
+
+  return (
+    <div className="max-w-7xl mx-auto px-6 relative">
+      <motion.div {...fadeUp} className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h4 className="text-3xl md:text-5xl font-black uppercase text-[#14532D]">Recent <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic">Forums</span></h4>
+          <p className="text-gray-500 mt-4 max-w-lg font-light leading-relaxed">Explore our latest philosophy forums, psychological stress management workshops, and student empowerment seminars.</p>
+        </div>
+      </motion.div>
+
+      <div 
+        ref={carouselRef}
+        className="flex overflow-x-auto gap-6 pb-12 pt-6 -mx-4 px-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        style={{ scrollBehavior: 'smooth' }}
+      >
+        {libraryEvents.map((ev, idx) => (
+          <motion.div
+            key={ev.id}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            onClick={() => setSelectedImage(ev)}
+            className="min-w-[85vw] sm:min-w-[400px] h-[500px] rounded-[2rem] overflow-hidden relative group snap-center shadow-xl border border-green-50 shrink-0 bg-black/5 cursor-pointer"
+          >
+            <img src={ev.image} alt={ev.title} className="absolute inset-0 w-full h-full object-cover scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#14532D] via-[#14532D]/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
+              <div className="bg-yellow-400 text-green-900 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full w-fit mb-4 shadow-lg shadow-yellow-400/20">
+                {ev.tag}
+              </div>
+              <h5 className="text-2xl font-black text-white mb-3 leading-tight">{ev.title}</h5>
+              <p className="text-green-50 text-sm leading-relaxed opacity-90 line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
+                {ev.desc}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="flex justify-center items-center gap-3 mt-4 mb-8">
+        {libraryEvents.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveIndex(idx)}
+            className={`transition-all duration-300 rounded-full ${
+              activeIndex === idx ? "w-8 h-2.5 bg-yellow-400" : "w-2.5 h-2.5 bg-green-200 hover:bg-green-400"
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 sm:p-10"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+            >
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/80 text-white rounded-full transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div className="relative flex-1 min-h-0 bg-black/5 flex items-center justify-center overflow-hidden">
+                <img
+                  src={selectedImage.image}
+                  alt={selectedImage.title}
+                  className="w-full h-full object-contain max-h-[70vh]"
+                />
+              </div>
+              <div className="p-6 md:p-8 bg-white shrink-0">
+                <div className="bg-yellow-400 text-green-900 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full w-fit mb-4">
+                  {selectedImage.tag}
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black text-[#14532D] mb-3">{selectedImage.title}</h3>
+                <p className="text-gray-600 leading-relaxed max-w-3xl">{selectedImage.desc}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const HeroSection = () => (
   <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#F0F9F4] via-[#F9FAF7] to-white z-0 py-20">
@@ -230,7 +387,7 @@ export default function Home() {
 
       {/* Library */}
       <section id="library" className="py-32 bg-white overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center mb-32">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -260,6 +417,9 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
+
+        {/* Dynamic Events Gallery */}
+        <EventsCarousel />
       </section>
 
       {/* Community */}
