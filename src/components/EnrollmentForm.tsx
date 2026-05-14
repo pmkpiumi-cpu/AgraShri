@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useState } from "react";
 import { Loader2, CheckCircle, AlertCircle, Clock } from "lucide-react";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import { checkRateLimit } from "@/app/actions/enroll";
 
 const formSchema = z.object({
