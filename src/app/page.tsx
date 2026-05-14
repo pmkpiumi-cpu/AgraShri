@@ -19,20 +19,6 @@ const fadeUp = {
 
 const libraryEvents = [
   {
-    id: 6,
-    title: "Modern Technology",
-    desc: "\"The Impact of Modern Technology on People's Lives\" presented by W.G.I.M.K. Wimalaweera, University of Peradeniya.",
-    tag: "Tech & Society",
-    image: "/images/events/library-event-1.jpeg"
-  },
-  {
-    id: 7,
-    title: "Motivation & Emotions",
-    desc: "A study on Motivation and Emotions based on Buddhist concepts with practical examples. Presented by Erandi Kaushalya Madhushani, University of Peradeniya.",
-    tag: "Buddhist Psychology",
-    image: "/images/events/library-event-2.jpeg"
-  },
-  {
     id: 1,
     title: "Philosophy of Fearmorhosis",
     desc: "One Day Philosophy Forum about 'Life, Society and Nation are Governed by Fear' conducted by Mr. Desh Subba.",
@@ -57,23 +43,42 @@ const libraryEvents = [
 
 const EventsCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isJump, setIsJump] = useState(false);
   const [selectedImage, setSelectedImage] = useState<typeof libraryEvents[0] | null>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const [cardWidth, setCardWidth] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  // Clone the first few items to the end for a seamless loop
+  const displayEvents = [...libraryEvents, ...libraryEvents.slice(0, 3)];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % libraryEvents.length);
-    }, 4000);
-    return () => clearInterval(interval);
+    const updateWidth = () => {
+      if (trackRef.current && trackRef.current.children.length > 0) {
+        setCardWidth((trackRef.current.children[0] as HTMLElement).offsetWidth + 24);
+      }
+    };
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
   useEffect(() => {
-    if (carouselRef.current && carouselRef.current.children.length > 0) {
-      const cardWidth = (carouselRef.current.children[0] as HTMLElement).offsetWidth + 24; // 24px is gap-6
-      carouselRef.current.scrollTo({
-        left: activeIndex * cardWidth,
-        behavior: 'smooth'
-      });
+    const interval = setInterval(() => {
+      if (!selectedImage) {
+        setActiveIndex((current) => current + 1);
+      }
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [selectedImage]);
+
+  useEffect(() => {
+    if (activeIndex === libraryEvents.length) {
+      const timeout = setTimeout(() => {
+        setIsJump(true);
+        setActiveIndex(0);
+        setTimeout(() => setIsJump(false), 50);
+      }, 700);
+      return () => clearTimeout(timeout);
     }
   }, [activeIndex]);
 
@@ -86,35 +91,34 @@ const EventsCarousel = () => {
         </div>
       </motion.div>
 
-      <div 
-        ref={carouselRef}
-        className="flex overflow-x-auto gap-6 pb-12 pt-6 -mx-4 px-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-        style={{ scrollBehavior: 'smooth' }}
-      >
-        {libraryEvents.map((ev, idx) => (
-          <motion.div
-            key={ev.id}
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
-            onClick={() => setSelectedImage(ev)}
-            className="min-w-[85vw] sm:min-w-[400px] h-[500px] rounded-[2rem] overflow-hidden relative group snap-center shadow-xl border border-green-50 shrink-0 bg-black/5 cursor-pointer"
-          >
-            <img src={ev.image} alt={ev.title} className="absolute inset-0 w-full h-full object-cover scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#14532D] via-[#14532D]/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
-              <div className="bg-yellow-400 text-green-900 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full w-fit mb-4 shadow-lg shadow-yellow-400/20">
-                {ev.tag}
+      <div className="overflow-hidden -mx-4 px-4 py-6">
+        <motion.div 
+          ref={trackRef}
+          animate={{ x: -activeIndex * cardWidth }}
+          transition={isJump ? { duration: 0 } : { duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+          className="flex gap-6"
+        >
+          {displayEvents.map((ev, idx) => (
+            <motion.div
+              key={`${ev.id}-${idx}`}
+              onClick={() => setSelectedImage(ev)}
+              className="min-w-[85vw] sm:min-w-[400px] h-[500px] rounded-[2rem] overflow-hidden relative group shadow-xl border border-green-50 shrink-0 bg-black/5 cursor-pointer"
+            >
+              <img src={ev.image} alt={ev.title} className="absolute inset-0 w-full h-full object-cover scale-[1.15] group-hover:scale-[1.25] transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#14532D] via-[#14532D]/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
+                <div className="bg-yellow-400 text-green-900 text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full w-fit mb-4 shadow-lg shadow-yellow-400/20">
+                  {ev.tag}
+                </div>
+                <h5 className="text-2xl font-black text-white mb-3 leading-tight">{ev.title}</h5>
+                <p className="text-green-50 text-sm leading-relaxed opacity-90 line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
+                  {ev.desc}
+                </p>
               </div>
-              <h5 className="text-2xl font-black text-white mb-3 leading-tight">{ev.title}</h5>
-              <p className="text-green-50 text-sm leading-relaxed opacity-90 line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
-                {ev.desc}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
       <div className="flex justify-center items-center gap-3 mt-4 mb-8">
@@ -123,7 +127,7 @@ const EventsCarousel = () => {
             key={idx}
             onClick={() => setActiveIndex(idx)}
             className={`transition-all duration-300 rounded-full ${
-              activeIndex === idx ? "w-8 h-2.5 bg-yellow-400" : "w-2.5 h-2.5 bg-green-200 hover:bg-green-400"
+              (activeIndex % libraryEvents.length) === idx ? "w-8 h-2.5 bg-yellow-400" : "w-2.5 h-2.5 bg-green-200 hover:bg-green-400"
             }`}
             aria-label={`Go to slide ${idx + 1}`}
           />
