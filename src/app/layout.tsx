@@ -8,9 +8,70 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+const siteUrl = "https://agrashri.lk";
+
 export const metadata: Metadata = {
-  title: "AgraShri Educational Institute | Empowering Minds, Building Futures",
-  description: "Modern learning and counseling platform dedicated to academic excellence, personal growth, and career development.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "AgraShri Educational Institute | Empowering Minds, Building Futures",
+    template: "%s | AgraShri Educational Institute",
+  },
+  description:
+    "AgraShri Education Institute is a modern learning and counseling platform in Sri Lanka dedicated to academic excellence, personal growth, career development, and student wellbeing — from Grade 1 to A/L and beyond.",
+  keywords: [
+    "AgraShri",
+    "educational institute",
+    "tuition Sri Lanka",
+    "A/L classes",
+    "O/L classes",
+    "counseling Sri Lanka",
+    "career guidance",
+    "university guidance",
+    "student wellbeing",
+    "school tuition",
+  ],
+  authors: [{ name: "AgraShri Educational Institute", url: siteUrl }],
+  creator: "AgraShri Educational Institute",
+  publisher: "AgraShri Educational Institute",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_LK",
+    url: siteUrl,
+    siteName: "AgraShri Educational Institute",
+    title: "AgraShri Educational Institute | Empowering Minds, Building Futures",
+    description:
+      "A modern learning and counseling platform dedicated to academic excellence, personal growth, career development, and student wellbeing.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "AgraShri Educational Institute",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AgraShri Educational Institute | Empowering Minds, Building Futures",
+    description:
+      "A modern learning and counseling platform dedicated to academic excellence, personal growth, and career development.",
+    images: ["/og-image.png"],
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+  category: "education",
 };
 
 export default function RootLayout({

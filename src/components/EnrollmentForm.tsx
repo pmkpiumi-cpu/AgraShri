@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useState } from "react";
-import { Loader2, CheckCircle } from "lucide-react";
+import { Loader2, CheckCircle, AlertCircle, Clock } from "lucide-react";
+import { submitEnrollment } from "@/app/actions/enroll";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -19,6 +20,7 @@ type FormData = z.infer<typeof formSchema>;
 export default function EnrollmentForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [serverError, setServerError] = useState<{ message: string; rateLimited?: boolean } | null>(null);
 
   const {
     register,
@@ -31,15 +33,17 @@ export default function EnrollmentForm() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
+    setServerError(null);
     try {
-      // Simulating a successful send for now
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      
-      setIsSuccess(true);
-      reset();
-    } catch (error) {
-      console.error("Failed to send email:", error);
-      alert("Something went wrong. Please try again later.");
+      const result = await submitEnrollment(data);
+      if (result.success) {
+        setIsSuccess(true);
+        reset();
+      } else {
+        setServerError({ message: result.error, rateLimited: result.rateLimited });
+      }
+    } catch {
+      setServerError({ message: "Something went wrong. Please try again later." });
     } finally {
       setIsSubmitting(false);
     }
@@ -70,6 +74,21 @@ export default function EnrollmentForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {/* Server error / rate limit banner */}
+      {serverError && (
+        <div className={`flex items-start gap-3 p-4 rounded-2xl border ${
+          serverError.rateLimited
+            ? "bg-amber-50 border-amber-200 text-amber-800"
+            : "bg-red-50 border-red-200 text-red-700"
+        }`}>
+          {serverError.rateLimited
+            ? <Clock className="w-5 h-5 shrink-0 mt-0.5" />
+            : <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+          }
+          <p className="text-sm font-medium">{serverError.message}</p>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className={labelClass}>Full Name</label>
@@ -128,12 +147,16 @@ export default function EnrollmentForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="w-full py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 hover:shadow-[0_8px_30px_rgba(22,163,74,0.35)] active:scale-[0.98]"
+        disabled={isSubmitting || !!serverError?.rateLimited}
+        className="w-full py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_8px_30px_rgba(22,163,74,0.35)] active:scale-[0.98]"
       >
         {isSubmitting ? (
           <>
             <Loader2 className="animate-spin" /> Processing...
+          </>
+        ) : serverError?.rateLimited ? (
+          <>
+            <Clock className="w-5 h-5" /> Limit Reached
           </>
         ) : (
           "Submit Enrollment →"

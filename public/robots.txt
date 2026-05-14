@@ -1,0 +1,7 @@
+# AgraShri Educational Institute - robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://agrashri.lk/sitemap.xml
