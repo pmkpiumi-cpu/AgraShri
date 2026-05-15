@@ -88,7 +88,7 @@ const EventsCarousel = () => {
     <div className="max-w-7xl mx-auto px-6 relative">
       <motion.div {...fadeUp} className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <h2 className="text-3xl md:text-5xl font-black uppercase text-[#14532D]">Recent <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic">Forums</span></h2>
+          <h2 className="text-3xl md:text-5xl font-black uppercase text-[#14532D]">Recent <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic px-4 py-2">Forums</span></h2>
           <p className="text-gray-500 mt-4 max-w-lg font-light leading-relaxed">Explore our latest philosophy forums, psychological stress management workshops, and student empowerment seminars.</p>
         </div>
       </motion.div>
@@ -354,7 +354,7 @@ export default function Home() {
             <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-green-100/50 blur-[120px] rounded-full" />
             <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-8">The Legacy</span>
             <h2 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
-              Discover <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic pr-8">Our Story</span>
+              Discover <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic px-4 py-2">Our Story</span>
             </h2>
             <p className="text-xl text-gray-500 font-light leading-relaxed mb-12">
               AgraShri Education Institute is a complete educational development platform.
@@ -416,7 +416,7 @@ export default function Home() {
           <motion.div {...fadeUp}>
             <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-8">The Advantage</span>
             <h2 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
-              Why Choose <br /><span className="text-green-300 italic">AgraShri?</span>
+              Why Choose <br /><span className="text-green-300 italic pr-4">AgraShri?</span>
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
               {[
@@ -479,7 +479,7 @@ export default function Home() {
           <motion.div {...fadeUp} className="order-1 lg:order-2">
             <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-8">The Hub</span>
             <h2 className="text-5xl md:text-8xl font-black uppercase leading-[0.9] tracking-tighter mb-12 text-[#14532D]">
-              Learning <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic pr-8">Sanctuary</span>
+              Learning <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic px-4 py-2">Sanctuary</span>
             </h2>
             <p className="text-xl text-gray-500 font-light leading-relaxed mb-12">
               Our library facilities provide a dedicated learning space, extensive reading resources, and quiet study areas for independent research and focused growth.

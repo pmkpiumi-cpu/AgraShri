@@ -28,7 +28,7 @@ export default function EnrollPage() {
             </div>
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-black mb-8 uppercase tracking-tighter text-[#14532D]">
               Join the{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic pr-4">Ecosystem</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-yellow-500 italic px-4 py-2">Ecosystem</span>
             </h1>
             <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed">
               Step into a new era of learning. Complete the application below to begin your journey with AgraShri.
