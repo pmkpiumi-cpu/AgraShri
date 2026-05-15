@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/Cursor";
+import CookieConsent from "@/components/CookieConsent";
+import ScrollProgress from "@/components/ScrollProgress";
+import BackToTop from "@/components/BackToTop";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const plusJakarta = Plus_Jakarta_Sans({ 
   subsets: ["latin"],
@@ -138,8 +142,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`${plusJakarta.className} antialiased bg-[#F9FAF7]`} suppressHydrationWarning>
+        <ScrollProgress />
         <Cursor />
         {children}
+        <CookieConsent />
+        <BackToTop />
+        <WhatsAppButton />
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FAQ from "@/components/FAQ";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, BookOpen, Users, HeartPulse, GraduationCap, Shield, Target, Zap, Globe, Cpu, Star, Sparkles, X } from "lucide-react";
 import Link from "next/link";
@@ -606,6 +607,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQ />
 
       {/* CTA */}
       <section className="py-32 px-6">
