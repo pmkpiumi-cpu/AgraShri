@@ -243,6 +243,46 @@ const HeroSection = () => (
 export default function Home() {
   return (
     <div className="bg-[#F9FAF7] text-[#14532D] min-h-screen overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "Course",
+              "name": "School Titans Program",
+              "description": "Subject-based classes, scholarship prep, O/L & A/L preparation for Grade 1 to A/L students.",
+              "provider": {
+                "@type": "EducationalOrganization",
+                "name": "AgraShri Educational Institute",
+                "sameAs": "https://agrashri.lk"
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Course",
+              "name": "Uni Pioneers Program",
+              "description": "Research guidance, skill development, and presentation training for university students.",
+              "provider": {
+                "@type": "EducationalOrganization",
+                "name": "AgraShri Educational Institute",
+                "sameAs": "https://agrashri.lk"
+              }
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Course",
+              "name": "Adult Visionaries Program",
+              "description": "Professional courses, language classes, and networking for personal growth and career development.",
+              "provider": {
+                "@type": "EducationalOrganization",
+                "name": "AgraShri Educational Institute",
+                "sameAs": "https://agrashri.lk"
+              }
+            }
+          ])
+        }}
+      />
       <Navbar />
       <HeroSection />
 

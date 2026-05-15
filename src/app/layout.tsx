@@ -79,27 +79,49 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
+  const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     "name": "AgraShri Educational Institute",
-    "url": "https://agrashri.lk",
-    "logo": "https://agrashri.lk/logo.png",
+    "url": siteUrl,
+    "logo": `${siteUrl}/logo.png`,
     "description": "AgraShri Education Institute is a modern learning and counseling platform in Sri Lanka dedicated to academic excellence, personal growth, career development, and student wellbeing.",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Sri Lanka",
+      "addressLocality": "Gampaha",
+      "addressRegion": "Western Province",
       "addressCountry": "LK"
     },
+    "areaServed": "Sri Lanka",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+94-76-828-5067",
       "contactType": "customer service",
-      "email": "agrashri.info@gmail.com"
+      "email": "agrashri.info@gmail.com",
+      "availableLanguage": ["English", "Sinhala"]
     },
     "sameAs": [
       "https://www.facebook.com/agrashri",
       "https://www.instagram.com/agrashri"
+    ]
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Enroll",
+        "item": `${siteUrl}/enroll`
+      }
     ]
   };
 
@@ -108,7 +130,11 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       </head>
       <body className={`${plusJakarta.className} antialiased bg-[#F9FAF7]`} suppressHydrationWarning>
