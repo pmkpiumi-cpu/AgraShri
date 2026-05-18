@@ -39,7 +39,7 @@ export default function FAQ() {
         className="text-center mb-16"
       >
         <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-xs font-black uppercase tracking-[0.4em] mb-6">Clarification</span>
-        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#14532D]">
+        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#14532D] ]">
           Frequently Asked <br /><span className="text-green-400 italic">Questions</span>
         </h2>
       </motion.div>
@@ -52,22 +52,22 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="border border-green-100 rounded-[2rem] bg-white overflow-hidden"
+            className="border border-green-100 rounded-[2rem] bg-white ] overflow-hidden transition-all"
           >
             <button
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              className="w-full p-8 flex items-center justify-between text-left hover:bg-green-50/50 transition-colors"
+              className="w-full p-8 flex items-center justify-between text-left hover:bg-green-50/50 transition-colors cursor-pointer"
             >
               <div className="flex items-center gap-4">
-                <div className={`p-3 rounded-xl ${openIndex === index ? 'bg-green-600 text-white' : 'bg-green-50 text-green-600'} transition-colors`}>
+                <div className={`p-3 rounded-xl ${openIndex === index ? 'bg-green-600 text-white' : 'bg-green-50 text-green-600 '} transition-colors`}>
                   <HelpCircle className="w-5 h-5" />
                 </div>
-                <span className="font-bold text-[#14532D] text-lg">{faq.question}</span>
+                <span className="font-bold text-[#14532D] ] text-lg">{faq.question}</span>
               </div>
               {openIndex === index ? (
                 <Minus className="w-5 h-5 text-yellow-500" />
               ) : (
-                <Plus className="w-5 h-5 text-green-300" />
+                <Plus className="w-5 h-5 text-green-300 " />
               )}
             </button>
             <AnimatePresence>

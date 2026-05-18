@@ -3,7 +3,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Loader2, CheckCircle, AlertCircle, Clock } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { checkRateLimit } from "@/app/actions/enroll";
@@ -14,6 +15,7 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number is required"),
   program: z.string().min(1, "Please select a program"),
   message: z.string().optional(),
+  website: z.string().optional(), // Invisible Honeypot field to trap spam bots
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -29,16 +31,41 @@ export default function EnrollmentForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [serverError, setServerError] = useState<{ message: string; rateLimited?: boolean } | null>(null);
 
+  const searchParams = useSearchParams();
+  const programParam = searchParams.get("program");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      phone: "",
+      program: programParam || "",
+      message: "",
+      website: "",
+    },
   });
 
+  useEffect(() => {
+    if (programParam) {
+      setValue("program", programParam);
+    }
+  }, [programParam, setValue]);
+
   const onSubmit = async (data: FormData) => {
+    // Honeypot check: If the hidden 'website' field is populated, it's a bot!
+    if (data.website) {
+      console.warn("Honeypot triggered! Spam bot submission ignored.");
+      setIsSuccess(true); // Simulate success to confuse the spam bot
+      return;
+    }
+
     setIsSubmitting(true);
     setServerError(null);
 
@@ -107,6 +134,18 @@ export default function EnrollmentForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      {/* Honeypot field - completely invisible to real users but bots will fill it */}
+      <div className="absolute top-[-9999px] left-[-9999px] h-0 w-0 overflow-hidden pointer-events-none opacity-0">
+        <label className="sr-only">Do not fill this website field if you are human</label>
+        <input 
+          type="text" 
+          tabIndex={-1} 
+          autoComplete="off" 
+          placeholder="Your website URL" 
+          {...register("website")} 
+        />
+      </div>
+
       {/* Error / rate limit banner */}
       {serverError && (
         <div

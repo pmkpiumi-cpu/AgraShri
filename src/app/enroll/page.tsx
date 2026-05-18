@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import EnrollmentForm from "@/components/EnrollmentForm";
 import { motion } from "framer-motion";
 import { Sparkles, ShieldCheck, Zap, Phone, Mail } from "lucide-react";
+import { Suspense } from "react";
 
 export default function EnrollPage() {
   return (
@@ -47,7 +48,13 @@ export default function EnrollPage() {
                 <ShieldCheck className="w-8 h-8 text-green-200" />
               </div>
               <h2 className="text-2xl font-black uppercase tracking-tight text-[#14532D] mb-8">Application Form</h2>
-              <EnrollmentForm />
+              <Suspense fallback={
+                <div className="flex items-center justify-center p-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+                </div>
+              }>
+                <EnrollmentForm />
+              </Suspense>
             </motion.div>
 
             {/* Info Side */}

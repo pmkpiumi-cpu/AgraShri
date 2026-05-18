@@ -11,7 +11,7 @@
   --accent-yellow: #FACC15;
   --accent-green-dark: #14532D;
   --card-bg: #F0F4EC;
-  --border-color: #D1FAE5;
+  --border-color: #E2E8F0;
   --text-muted: #6B7280;
   --text-body: #374151;
 }
@@ -50,4 +50,40 @@ html, body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #14532D;
+}
+
+/* Drifting mesh blobs animations */
+@keyframes float-slow {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.08) rotate(120deg);
+  }
+  66% {
+    transform: translate(-30px, 20px) scale(0.92) rotate(240deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(360deg);
+  }
+}
+
+@keyframes float-medium {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(-40px, 40px) scale(1.12) rotate(180deg);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(360deg);
+  }
+}
+
+.animate-blob-slow {
+  animation: float-slow 22s infinite ease-in-out;
+}
+
+.animate-blob-medium {
+  animation: float-medium 16s infinite ease-in-out;
 }
